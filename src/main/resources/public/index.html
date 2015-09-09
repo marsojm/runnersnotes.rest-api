@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html ng-app="runnersNotes">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body ng-controller="NoteController as notes">
+    <div ng-repeat="note in notes.notes">
+        <h3>{{note.comments}}</h3>
+    </div>
+</body>
+</html>
