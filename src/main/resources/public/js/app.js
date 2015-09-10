@@ -9,5 +9,18 @@
                 console.log(data);
             	rn.notes = data.items;
         });
+
+        this.addNote = function(note) {
+
+        };
     }]);
+    app.controller('AddNoteController', ['$http',function($http) {
+        this.note = {};
+
+        this.addNote = function() {
+            console.log(this.note);
+        };
+
+    }]);
+
 })();
