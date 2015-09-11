@@ -5,22 +5,17 @@
     app.controller('NoteController',['$http',function($http){
         var rn = this;
         rn.notes = [];
+        rn.note = {};
         $http.get('http://localhost:8080/notes').success(function(data){
-                console.log(data);
             	rn.notes = data.items;
         });
 
-        this.addNote = function(note) {
-
-        };
-    }]);
-    app.controller('AddNoteController', ['$http',function($http) {
-        this.note = {};
-
         this.addNote = function() {
-            console.log(this.note);
+            rn.note.created = new Date(rn.note.date).getTime();
+            $http.post('http://localhost:8080/notes',rn.note).then(function(){
+                rn.notes.push(rn.note);
+                rn.note = {};
+            });
         };
-
     }]);
-
 })();
