@@ -14,10 +14,10 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Runner's Notes</a>
+                <a class="navbar-brand" href="#" ng-click="noteCtrl.clearAlerts()">Runner's Notes</a>
             </div>
             <form class="navbar-form navbar-right">
-                <button id="addNewBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
+                <button ng-click="noteCtrl.clearAlerts()" id="addNewBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
                     Add a new run
                 </button>
             </form>
@@ -25,12 +25,10 @@
         </div>
     </nav>
     <div class="container">
-        <div class="alert alert-dismissible alert-success" ng-show="noteCtrl.success">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert alert-success" ng-show="noteCtrl.success">
             <strong>Success!</strong> You have successfully created a new running note!
         </div>
-        <div class="alert alert-dismissible alert-danger" ng-show="noteCtrl.errors.length > 0">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert alert-danger" ng-show="noteCtrl.errors.length > 0">
             <strong>Oh snap!</strong> The following error(s) occurred:
             <ul ng-repeat="error in noteCtrl.errors">
                 <li>{{error}}</li>
