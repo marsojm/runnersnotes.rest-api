@@ -19,9 +19,17 @@
         </div>
     </nav>
     <div class="container">
+        <div class="alert alert-dismissible alert-success" ng-show="noteCtrl.success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Success!</strong> You have successfully created a new running note!
+        </div>
+        <div class="alert alert-dismissible alert-danger" ng-show="noteCtrl.error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div>
         <h1>My Runs</h1>
         <br/>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
+        <button id="addNewBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
             Add a new run
         </button>
         <br/>

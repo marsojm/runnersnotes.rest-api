@@ -5,9 +5,12 @@ import fi.github.marsojm.runnersnotes.core.interactors.NotesInteractor;
 import fi.github.marsojm.runnersnotes.gateway.boundaries.InvalidIdException;
 import fi.github.marsojm.runnersnotes.gateway.boundaries.NoteGateway;
 import fi.github.marsojm.runnersnotes.gateway.implementations.InMemoryDb;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Date;
 
@@ -43,9 +46,15 @@ public class NoteController {
     }
 
     @RequestMapping(value = "/notes", method = RequestMethod.POST)
-    public HttpStatus createNote(@RequestBody CreateNoteRequest request) {
+    public ResponseEntity<?> createNote(@RequestBody CreateNoteRequest request) {
         NoteBoundary interactor = new NotesInteractor(db);
         int id = interactor.createNote(request);
-        return HttpStatus.CREATED;
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(id).toUri());
+        return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
+
     }
 }
