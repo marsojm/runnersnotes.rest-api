@@ -16,6 +16,12 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Runner's Notes</a>
             </div>
+            <form class="navbar-form navbar-right">
+                <button id="addNewBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
+                    Add a new run
+                </button>
+            </form>
+
         </div>
     </nav>
     <div class="container">
@@ -30,15 +36,9 @@
                 <li>{{error}}</li>
             </ul>
         </div>
-        <h1>My Runs</h1>
-        <br/>
-        <button id="addNewBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
-            Add a new run
-        </button>
-        <br/>
         <div class="collapse" id="addForm">
             <div class="well">
-                <form ng-submit="noteCtrl.addNote()">
+                <form class="form-inline" ng-submit="noteCtrl.addNote()">
                     <div class="form-group">
                         <label for="comments">Comments</label>
                         <input ng-model="noteCtrl.note.comments" type="text" class="form-control" id="comments" placeholder="Comments...">
@@ -59,6 +59,10 @@
                 </form>
             </div>
         </div>
+        <h1>My Runs</h1>
+        <br/>
+
+
         <br/>
         <div class="list-group" ng-repeat="note in noteCtrl.notes | orderBy:'-created'">
             <a href="#" class="list-group-item">
