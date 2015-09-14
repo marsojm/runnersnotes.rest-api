@@ -23,9 +23,12 @@
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>Success!</strong> You have successfully created a new running note!
         </div>
-        <div class="alert alert-dismissible alert-danger" ng-show="noteCtrl.error">
+        <div class="alert alert-dismissible alert-danger" ng-show="noteCtrl.errors.length > 0">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+            <strong>Oh snap!</strong> The following error(s) occurred:
+            <ul ng-repeat="error in noteCtrl.errors">
+                <li>{{error}}</li>
+            </ul>
         </div>
         <h1>My Runs</h1>
         <br/>

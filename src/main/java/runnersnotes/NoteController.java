@@ -1,6 +1,7 @@
 package runnersnotes;
 
 import fi.github.marsojm.runnersnotes.boundary.*;
+import fi.github.marsojm.runnersnotes.core.interactors.EntityValidationException;
 import fi.github.marsojm.runnersnotes.core.interactors.NotesInteractor;
 import fi.github.marsojm.runnersnotes.gateway.boundaries.InvalidIdException;
 import fi.github.marsojm.runnersnotes.gateway.boundaries.NoteGateway;
@@ -48,7 +49,14 @@ public class NoteController {
     @RequestMapping(value = "/notes", method = RequestMethod.POST)
     public ResponseEntity<?> createNote(@RequestBody CreateNoteRequest request) {
         NoteBoundary interactor = new NotesInteractor(db);
-        int id = interactor.createNote(request);
+
+        int id = 0;
+        try {
+            id = interactor.createNote(request);
+        } catch (EntityValidationException e) {
+            HttpHeaders httpHeaders = new HttpHeaders();
+            return new ResponseEntity<>(e.getErrors(), httpHeaders, HttpStatus.BAD_REQUEST);
+        }
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder
