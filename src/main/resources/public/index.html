@@ -36,24 +36,25 @@
         </div>
         <div class="collapse" id="addForm">
             <div class="well">
-                <form class="form-inline" ng-submit="noteCtrl.addNote()">
+                <form name="addNoteForm" class="form-inline" ng-submit="noteCtrl.addNote()" novalidate>
                     <div class="form-group">
                         <label for="comments">Comments</label>
                         <input ng-model="noteCtrl.note.comments" type="text" class="form-control" id="comments" placeholder="Comments...">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error': addNoteForm.date.$invalid && !addNoteForm.date.$pristine}" >
                         <label for="date">Date</label>
-                        <input ng-model="noteCtrl.note.date" type="text" class="form-control" id="date" placeholder="yyyy-MM-dd">
+                        <input name="date" ng-model="noteCtrl.note.date" type="text" class="form-control" id="date"
+                               placeholder="yyyy-MM-dd" ng-pattern="noteCtrl.datePattern" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error': addNoteForm.duration.$invalid && !addNoteForm.duration.$pristine}">
                         <label for="duration">Duration</label>
-                        <input ng-model="noteCtrl.note.duration" type="number" class="form-control" id="duration" min="0" placeholder="0">
+                        <input name="duration" ng-model="noteCtrl.note.duration" type="number" class="form-control" id="duration" min="0" placeholder="0" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error': addNoteForm.distance.$invalid && !addNoteForm.distance.$pristine}">
                         <label for="distance">Distance</label>
-                        <input ng-model="noteCtrl.note.distance" type="number" class="form-control" id="distance" min="0" placeholder="0.0">
+                        <input name="distance" ng-model="noteCtrl.note.distance" type="number" class="form-control" id="distance" min="0" placeholder="0.0" required>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" ng-disabled="addNoteForm.$invalid" class="btn btn-default">Submit</button>
                 </form>
             </div>
         </div>

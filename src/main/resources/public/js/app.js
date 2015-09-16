@@ -8,6 +8,7 @@
         rn.errors = [];
         rn.notes = [];
         rn.note = {};
+        rn.datePattern = /^(20[0-9][0-9])-(1[0-2]|0[1-9])-([0-3][0-9])$/;
         $http.get('http://localhost:8080/notes').success(function(data){
             	rn.notes = data.items;
         });
