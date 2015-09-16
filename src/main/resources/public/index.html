@@ -18,7 +18,7 @@
             </div>
             <form class="navbar-form navbar-right">
                 <button ng-click="noteCtrl.clearAlerts()" id="addNewBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
-                    Add a new run
+                    Add a new note
                 </button>
             </form>
 
@@ -58,18 +58,21 @@
                 </form>
             </div>
         </div>
-        <h1>My Runs</h1>
+        <h1>My Notes</h1>
         <br/>
 
 
         <br/>
-        <div class="list-group" ng-repeat="note in noteCtrl.notes | orderBy:'-created'">
+        <div class="list-group" ng-repeat="note in noteCtrl.notes | orderBy:'-created'" ng-show="noteCtrl.notes.length > 0">
             <a href="#" class="list-group-item">
                 <h4>{{note.created | date:'yyyy-MM-dd'}}</h4>
                 <span><strong>Comments:</strong> <em>{{note.comments}}</em></span> |
                 <span><strong>Duration:</strong> {{note.duration}} min</span> |
                 <span><strong>Distance:</strong> {{note.distance}} km</span>
             </a>
+        </div>
+        <div class="alert alert-info" ng-show="noteCtrl.notes.length < 1">
+            <strong>It seems that you don't have any notes yet!</strong> Just click 'Add a new note' to get started.
         </div>
     </div>
 </body>
